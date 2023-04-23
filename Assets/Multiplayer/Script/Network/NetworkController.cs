@@ -16,6 +16,10 @@ namespace Multiplayer.Controller
         [SerializeField]
         GameObject _loadingPanel;
         [SerializeField]
+        TMP_InputField _name, _weight;
+        [SerializeField]
+        Button _male, _female;
+        [SerializeField]
         Slider _slider;
         [Header("Join Room")]
         [SerializeField]
@@ -29,6 +33,7 @@ namespace Multiplayer.Controller
         Button _buttonCreate;
         Hashtable _hashTemp;
         string _nameTemp;
+        bool _gender = true; //true is male
         bool readyToCreate = false;
         private void Awake()
         {
@@ -77,9 +82,8 @@ namespace Multiplayer.Controller
             roomOptions.IsOpen = true;
 
             PhotonNetwork.JoinOrCreateRoom(name, roomOptions, TypedLobby.Default);
-            PhotonNetwork.SetPlayerCustomProperties(_hashTemp);
-            print("name " + _nameTemp);
-            PhotonNetwork.LocalPlayer.NickName = _nameTemp;
+
+            AssignPropertiesPlayer();
 
             StartCoroutine(LoadLevel(1));
         }
@@ -106,11 +110,10 @@ namespace Multiplayer.Controller
 
             PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
             print("room created");
+            AssignPropertiesPlayer();
+
             PhotonNetwork.LoadLevel(1);
 
-            Hashtable hash = new Hashtable();
-            hash.Add("Avatar", PlayerPrefs.GetInt("AvatarID"));
-            PhotonNetwork.SetPlayerCustomProperties(hash);
         }
         IEnumerator LoadLevel(int index)
         {
@@ -124,13 +127,34 @@ namespace Multiplayer.Controller
             }
         }
 
-        public void SaveProperties(Hashtable hash)
-        {
-            _hashTemp = hash;
+        public void AssignPropertiesPlayer(){
+            Hashtable hash = new Hashtable();
+            hash.Add("gender", _gender);
+
+            int weightTemp = 75;
+
+            if(!string.IsNullOrEmpty(_weight.text))
+                weightTemp = int.Parse(_weight.text);
+
+            hash.Add("weight", weightTemp);
+            PhotonNetwork.SetPlayerCustomProperties(hash);
+
+            string nickName = "";
+            if(string.IsNullOrEmpty(_name.text))
+                nickName = RandomTextFill.RandomText5();
+            else
+                nickName = _name.text;
+
+            PhotonNetwork.LocalPlayer.NickName = nickName;
         }
         public void SetName(string name)
         {
             _nameTemp = name;
+        }
+        public void ChooseGender(bool isMale){
+            _male.interactable = !isMale;
+            _female.interactable = isMale;
+            _gender = isMale;
         }
         public override void OnJoinedRoom()
         {

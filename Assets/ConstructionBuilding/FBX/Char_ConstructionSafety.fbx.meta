@@ -26,8 +26,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -35,7 +34,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -92,82 +91,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: Char_ConstructionSafety(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Pants
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.000000004172325, y: 5.960485e-10, z: -0.000000012516975}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Vest
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.000000014296734, y: 0.000000037550926, z: 0.0000000016391338}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Boots
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.000000004172325, y: 5.960485e-10, z: -0.000000012516975}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Body
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.0000000038743018, y: -0.000000038146972, z: -0.0000000011920991}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Shirt
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.0000000047683715, y: -0.00000005722046, z: 0.000000016689292}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Helmet
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: 0.00000004053116, z: -0.000000003371381}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Ch17_Body.001
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: -0.000000038146972, z: -0.0000000011920991}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Circle.002
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.00010871887, y: 1.5877692, z: 0.1157152}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Circle.003
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: 1.6167495, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Circle.004
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: 1.0195711, z: 0.028412186}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Circle.009
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: 0.7297946, z: 0.16032675}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Plane.002
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: -0.00000011920929, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Circle.001
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0.00020718575, y: 1.6581811, z: 0.10636571}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Plane.001
-      parentName: Char_ConstructionSafety(Clone)
-      position: {x: -0, y: -0.00000011920929, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -182,9 +106,9 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 0
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

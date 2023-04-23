@@ -12,7 +12,8 @@ public class NetworkSpawnerController : MonoBehaviourPunCallbacks
     [SerializeField]
     Collider userGroundSpawn;
     GameObject spawnedPlayerPrefab;
-    GameObject localPlayerPrefab;
+    [SerializeField]
+    GameObject localPlayer;
 
     private void Awake() {
         if(instance == null)
@@ -37,13 +38,16 @@ public class NetworkSpawnerController : MonoBehaviourPunCallbacks
         // PhotonNetwork.LocalPlayer.NickName = "Player "+PhotonNetwork.CountOfPlayers;
 
         Vector3 pos = GetRandomPointAbove(userGroundSpawn);
-        spawnedPlayerPrefab = PhotonNetwork.Instantiate("Player", pos,new Quaternion());
+        localPlayer.transform.position = pos+Vector3.up;
+        spawnedPlayerPrefab = PhotonNetwork.Instantiate("ConstructionAvatar", pos,new Quaternion());
         
         if(spawnedPlayerPrefab.GetComponent<PhotonView>().IsMine){
             // GameplayController.instance.localPlayer = spawnedPlayerPrefab;
-            spawnedPlayerPrefab.GetComponent<OtherPlayerScript>().SetLocal();
+            spawnedPlayerPrefab.GetComponent<HeadBodyRig>().InitLocal();
+            spawnedPlayerPrefab.GetComponent<WalkingController>().activeManual = true;
         }else{
-            spawnedPlayerPrefab.GetComponent<OtherPlayerScript>().SetNotLocal();
+            spawnedPlayerPrefab.GetComponent<WalkingController>().activeManual = false;
+            spawnedPlayerPrefab.GetComponent<HeadBodyRig>().SetProperties(false);
         }
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)

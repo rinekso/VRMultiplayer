@@ -18,16 +18,14 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	public event Action CameraUpdated;
 	public event Action PreCharacterMove;
-
+	[Header("Hook properties")]
+	public GameObject _target;
+	public bool moveAllow = true;
+	Vector3 destination;
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		if (CameraRig == null) CameraRig = GetComponentInChildren<OVRCameraRig>();
-	}
-
-	void Start ()
-	{
-		
 	}
 	
 	private void FixedUpdate()
@@ -66,7 +64,18 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		moveDir += ort * (primaryAxis.x * Vector3.right);
 		moveDir += ort * (primaryAxis.y * Vector3.forward);
 		//_rigidbody.MovePosition(_rigidbody.transform.position + moveDir * Speed * Time.fixedDeltaTime);
-		_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+		destination = _rigidbody.position + moveDir * Speed * Time.fixedDeltaTime;
+
+		if(moveAllow)
+			_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+		else{
+			if(Vector3.Distance(_target.transform.position,GetDestinationMove()) < Vector3.Distance(_target.transform.position,transform.position)){
+				_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+			}
+		}
+	}
+	public Vector3 GetDestinationMove(){
+		return destination;
 	}
 
 	void SnapTurn()

@@ -13,27 +13,32 @@ public class WalkingController : MonoBehaviour
     private HeadBodyRig rig;
     private Transform headTarget;
     private Vector3 previousPosition;
+    public bool activeManual;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        rig = GetComponent<HeadBodyRig>();
-        headTarget = rig.head.VRTarget;
-        previousPosition = headTarget.position;
+        if(activeManual){
+            animator = GetComponent<Animator>();
+            rig = GetComponent<HeadBodyRig>();
+            headTarget = rig.head.VRTarget;
+            previousPosition = headTarget.position;
+        }
     }
 
     private void FixedUpdate()
     {
-        Vector3 headSpeed = (headTarget.position - previousPosition) / Time.deltaTime;
-        headSpeed.y = 0;
-        Vector3 localHeadSpeed = transform.InverseTransformDirection(headSpeed);
-        previousPosition = headTarget.position;
+        if(activeManual){
+            Vector3 headSpeed = (headTarget.position - previousPosition) / Time.deltaTime;
+            headSpeed.y = 0;
+            Vector3 localHeadSpeed = transform.InverseTransformDirection(headSpeed);
+            previousPosition = headTarget.position;
 
-        float previousX = animator.GetFloat("x");
-        float previousY = animator.GetFloat("y");
+            float previousX = animator.GetFloat("x");
+            float previousY = animator.GetFloat("y");
 
-        animator.SetBool("isWalking", localHeadSpeed.magnitude > speedMinimum);
-        animator.SetFloat("x", Mathf.Lerp(previousX, Mathf.Clamp(localHeadSpeed.x, -1, 1), lerpFactor));
-        animator.SetFloat("y", Mathf.Lerp(previousY, Mathf.Clamp(localHeadSpeed.z, -1, 1), lerpFactor));
+            animator.SetBool("isWalking", localHeadSpeed.magnitude > speedMinimum);
+            animator.SetFloat("x", Mathf.Lerp(previousX, Mathf.Clamp(localHeadSpeed.x, -1, 1), lerpFactor));
+            animator.SetFloat("y", Mathf.Lerp(previousY, Mathf.Clamp(localHeadSpeed.z, -1, 1), lerpFactor));
+        }
     }
 }
